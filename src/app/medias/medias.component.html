@@ -1,0 +1,41 @@
+<table mat-table class="mat-elevation-z8" [dataSource]="medias" >
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let media">{{media.id}}</mat-cell>
+  </ng-container>
+
+  <!-- FileName Column -->
+  <ng-container matColumnDef="fileName">
+    <mat-header-cell *matHeaderCellDef>Nom du fichier</mat-header-cell>
+    <mat-cell *matCellDef="let media">{{media.fileName}}</mat-cell>
+  </ng-container>
+
+  <!-- TempName Column -->
+  <ng-container matColumnDef="tempName">
+    <mat-header-cell *matHeaderCellDef>Nom du fichier sur le serveur</mat-header-cell>
+    <mat-cell *matCellDef="let media">{{media.tempName}}</mat-cell>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+    <mat-cell *matCellDef="let media">{{media.date}}</mat-cell>
+  </ng-container>
+
+  <!-- Intervention_id Column -->
+  <ng-container matColumnDef="intervention_id">
+    <mat-header-cell *matHeaderCellDef>Id de l'intervention</mat-header-cell>
+    <mat-cell *matCellDef="let media">{{media.intervention_id}}</mat-cell>
+  </ng-container>
+
+  <!-- Deleted Column -->
+  <ng-container matColumnDef="deleted">
+    <mat-header-cell *matHeaderCellDef>Supprimé</mat-header-cell>
+    <mat-cell *matCellDef="let media"> {{media.deleted}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+</table>

@@ -1,0 +1,83 @@
+<table mat-table class="mat-elevation-z8" [dataSource]="interventions">
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+    <mat-cell *matCellDef="let intervention"> {{intervention.id}} </mat-cell>
+  </ng-container>
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>Titre</mat-header-cell>
+    <mat-cell *matCellDef="let intervention"> {{intervention.title}} </mat-cell>
+  </ng-container>
+
+  <!-- Client Column -->
+  <ng-container matColumnDef="client">
+    <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.client.name}} {{intervention.client.lastname}}</mat-cell>
+  </ng-container>
+
+  <!-- User Column -->
+  <ng-container matColumnDef="user">
+    <mat-header-cell *matHeaderCellDef>Intervenant</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.user_id}}</mat-cell>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.description}}</mat-cell>
+  </ng-container>
+
+  <!-- Km Column -->
+  <ng-container matColumnDef="km">
+    <mat-header-cell *matHeaderCellDef>Km</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.km}}</mat-cell>
+  </ng-container>
+
+  <!-- Bill Number Column -->
+  <ng-container matColumnDef="billNumber">
+    <mat-header-cell *matHeaderCellDef>Numéro de facture</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.billNumber}}</mat-cell>
+  </ng-container>
+
+  <!-- Bill Date Column -->
+  <ng-container matColumnDef="billDate">
+    <mat-header-cell *matHeaderCellDef>Date de facturation</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.billDate}}</mat-cell>
+  </ng-container>
+
+  <!-- Payment Type Column -->
+  <ng-container matColumnDef="paymentType">
+    <mat-header-cell *matHeaderCellDef>Type de paiement</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.paymentType}}</mat-cell>
+  </ng-container>
+
+  <!-- Payment Date Column -->
+  <ng-container matColumnDef="paymentDate">
+    <mat-header-cell *matHeaderCellDef>Date de paiement</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.paymentDate}}</mat-cell>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+
+    <mat-header-cell *matHeaderCellDef>Statut</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div style="width:20px;height:20px;background-color:#b80600;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Ouverte'"></div>
+      <div style="width:20px;height:20px;background-color:#ffdd1b;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Terminée'"></div>
+      <div style="width:20px;height:20px;background-color:#ea9200;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Facturée'"></div>
+      <div style="width:20px;height:20px;background-color:#00c608;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Réglée'"></div>
+
+      {{intervention.status.name}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+</table>
+

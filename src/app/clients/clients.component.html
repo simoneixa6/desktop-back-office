@@ -1,0 +1,83 @@
+<table mat-table class="mat-elevation-z8" [dataSource]="clients" >
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.id}} </mat-cell>
+  </ng-container>
+
+  <!-- Civility Column -->
+  <ng-container matColumnDef="civility">
+    <mat-header-cell *matHeaderCellDef>Civilité</mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.civility}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Prénom</mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.name}}</mat-cell>
+  </ng-container>
+
+  <!-- LastName Column -->
+  <ng-container matColumnDef="lastname">
+    <mat-header-cell *matHeaderCellDef> Nom</mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.lastname}}</mat-cell>
+  </ng-container>
+
+  <!-- Company Column -->
+  <ng-container matColumnDef="company">
+    <mat-header-cell *matHeaderCellDef> Entreprise </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.company}}</mat-cell>
+  </ng-container>
+
+  <!-- Company Status Column -->
+  <ng-container matColumnDef="companyStatus">
+    <mat-header-cell *matHeaderCellDef> Statut de l'entreprise </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.companyStatus}}</mat-cell>
+  </ng-container>
+
+  <!-- Phone Column -->
+  <ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef> Téléphone </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.phone}}</mat-cell>
+  </ng-container>
+
+  <!-- Mail Column -->
+  <ng-container matColumnDef="mail">
+    <mat-header-cell *matHeaderCellDef> Mail </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.mail}}</mat-cell>
+  </ng-container>
+
+  <!-- FirstVisitDate Column -->
+  <ng-container matColumnDef="firstVisitDate">
+    <mat-header-cell *matHeaderCellDef> Date de première visite </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.firstVisitDate}}</mat-cell>
+  </ng-container>
+
+  <!-- How Column -->
+  <ng-container matColumnDef="how">
+    <mat-header-cell *matHeaderCellDef> Comment ? </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.how}}</mat-cell>
+  </ng-container>
+
+  <!-- Why Column -->
+  <ng-container matColumnDef="why">
+    <mat-header-cell *matHeaderCellDef> Pourquoi ? </mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.why}}</mat-cell>
+  </ng-container>
+
+  <!-- Problematic Column -->
+  <ng-container matColumnDef="problematic">
+    <mat-header-cell *matHeaderCellDef>Problématique</mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.problematic}}</mat-cell>
+  </ng-container>
+
+  <!-- Deleted Column -->
+  <ng-container matColumnDef="deleted">
+    <mat-header-cell *matHeaderCellDef>Supprimé</mat-header-cell>
+    <mat-cell *matCellDef="let client"> {{client.deleted}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+</table>
