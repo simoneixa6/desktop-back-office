@@ -1,9 +1,12 @@
 table {
   width: 95%;
   margin: 20px auto;
+  padding: 5px;
 }
 
-
-.mat-cell {
-  padding: 10px 10px 8px 0;
+// Changement de la taille de la colonne Description
+mat-cell:nth-child(5),
+mat-header-cell:nth-child(5) {
+  flex: 0 0 20%;
+  padding-right: 15px;
 }

@@ -1,15 +1,30 @@
 <table mat-table class="mat-elevation-z8" [dataSource]="interventions">
 
-  <!-- Id Column -->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
-    <mat-cell *matCellDef="let intervention"> {{intervention.id}} </mat-cell>
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>Statut</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div style="width:15px;height:15px;margin-right:5px;background-color:#b80600;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Ouverte'"></div>
+      <div style="width:15px;height:15px;margin-right:5px;background-color:#ffdd1b;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Terminée'"></div>
+      <div style="width:15px;height:15px;margin-right:5px;background-color:#ea9150;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Facturée'"></div>
+      <div style="width:15px;height:15px;margin-right:5px;background-color:#00c608;border-radius: 50px"
+           *ngIf="intervention.status.name === 'Réglée'"></div>
+
+      {{intervention.status.name}}</mat-cell>
   </ng-container>
+
 
   <!-- Title Column -->
   <ng-container matColumnDef="title">
     <mat-header-cell *matHeaderCellDef>Titre</mat-header-cell>
-    <mat-cell *matCellDef="let intervention"> {{intervention.title}} </mat-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div style="width:120px;word-wrap:break-word">
+        {{intervention.title}}
+      </div>
+    </mat-cell>
   </ng-container>
 
   <!-- Client Column -->
@@ -27,13 +42,30 @@
   <!-- Description Column -->
   <ng-container matColumnDef="description">
     <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-    <mat-cell *matCellDef="let intervention">{{intervention.description}}</mat-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div style="width:500px;word-wrap:break-word;padding-right:5px">
+        {{intervention.description}}
+      </div>
+    </mat-cell>
   </ng-container>
 
   <!-- Km Column -->
   <ng-container matColumnDef="km">
     <mat-header-cell *matHeaderCellDef>Km</mat-header-cell>
     <mat-cell *matCellDef="let intervention">{{intervention.km}}</mat-cell>
+  </ng-container>
+
+  <!-- Periods Column -->
+  <ng-container matColumnDef="periods">
+    <mat-header-cell *matHeaderCellDef>Périodes</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">
+      <mat-label>{{intervention.periods[0].date | date: 'dd/MM/yyyy'}}</mat-label>
+      <mat-select style="margin-right: 30px">
+          <mat-option *ngFor="let period of intervention.periods">
+            {{period.date | date:'dd/MM/yyyy'}}  -  {{period.start | date: 'hh:mm'}} -> {{period.end | date: 'hh:mm'}}
+          </mat-option>
+        </mat-select>
+    </mat-cell>
   </ng-container>
 
   <!-- Bill Number Column -->
@@ -45,7 +77,7 @@
   <!-- Bill Date Column -->
   <ng-container matColumnDef="billDate">
     <mat-header-cell *matHeaderCellDef>Date de facturation</mat-header-cell>
-    <mat-cell *matCellDef="let intervention">{{intervention.billDate}}</mat-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.billDate | date:'dd/MM/yyyy'}}</mat-cell>
   </ng-container>
 
   <!-- Payment Type Column -->
@@ -57,24 +89,29 @@
   <!-- Payment Date Column -->
   <ng-container matColumnDef="paymentDate">
     <mat-header-cell *matHeaderCellDef>Date de paiement</mat-header-cell>
-    <mat-cell *matCellDef="let intervention">{{intervention.paymentDate}}</mat-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.paymentDate | date:'dd/MM/yyyy'}}</mat-cell>
   </ng-container>
 
-  <!-- Status Column -->
-  <ng-container matColumnDef="status">
-
-    <mat-header-cell *matHeaderCellDef>Statut</mat-header-cell>
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
     <mat-cell *matCellDef="let intervention">
-      <div style="width:20px;height:20px;background-color:#b80600;border-radius: 50px"
-           *ngIf="intervention.status.name === 'Ouverte'"></div>
-      <div style="width:20px;height:20px;background-color:#ffdd1b;border-radius: 50px"
-           *ngIf="intervention.status.name === 'Terminée'"></div>
-      <div style="width:20px;height:20px;background-color:#ea9200;border-radius: 50px"
-           *ngIf="intervention.status.name === 'Facturée'"></div>
-      <div style="width:20px;height:20px;background-color:#00c608;border-radius: 50px"
-           *ngIf="intervention.status.name === 'Réglée'"></div>
+      <div style="width:150px;word-wrap:break-word">
+        {{intervention.id}}
+      </div>
+    </mat-cell>
+  </ng-container>
 
-      {{intervention.status.name}}</mat-cell>
+  <!-- Delete Column -->
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div class="example-button-container">
+        <button mat-icon-button color="warn" (click)="deleteIntervention(intervention.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>

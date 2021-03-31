@@ -21,7 +21,7 @@
   <!-- Date Column -->
   <ng-container matColumnDef="date">
     <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
-    <mat-cell *matCellDef="let media">{{media.date}}</mat-cell>
+    <mat-cell *matCellDef="let media">{{media.date | date:'dd/MM/yyyy  HH:mm:ss'}}</mat-cell>
   </ng-container>
 
   <!-- Intervention_id Column -->
@@ -35,6 +35,20 @@
     <mat-header-cell *matHeaderCellDef>Supprimé</mat-header-cell>
     <mat-cell *matCellDef="let media"> {{media.deleted}}</mat-cell>
   </ng-container>
+
+  <!-- Download Column -->
+  <ng-container matColumnDef="download">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let media">
+      <div class="example-button-container">
+        <button mat-icon-button color="warn" (click)="downloadMedia(media.id)">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+
 
   <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
   <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>

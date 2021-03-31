@@ -1,10 +1,5 @@
 <table mat-table class="mat-elevation-z8" [dataSource]="clients" >
 
-  <!-- Id Column -->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-    <mat-cell *matCellDef="let client"> {{client.id}} </mat-cell>
-  </ng-container>
 
   <!-- Civility Column -->
   <ng-container matColumnDef="civility">
@@ -48,10 +43,23 @@
     <mat-cell *matCellDef="let client"> {{client.mail}}</mat-cell>
   </ng-container>
 
+  <!-- Addresses Column -->
+  <ng-container matColumnDef="addresses">
+    <mat-header-cell *matHeaderCellDef>Addresses</mat-header-cell>
+    <mat-cell *matCellDef="let client">
+<!--      <mat-label>{{client.addresses[0].city}}</mat-label>
+      <mat-select style="margin-right: 30px">
+        <mat-option *ngFor="let site of client.addresses">
+          {{site.address}}  {{site.zipCode}}  {{site.city}}
+        </mat-option>
+      </mat-select>-->
+    </mat-cell>
+  </ng-container>
+
   <!-- FirstVisitDate Column -->
   <ng-container matColumnDef="firstVisitDate">
     <mat-header-cell *matHeaderCellDef> Date de première visite </mat-header-cell>
-    <mat-cell *matCellDef="let client"> {{client.firstVisitDate}}</mat-cell>
+    <mat-cell *matCellDef="let client"> {{client.firstVisitDate | date:'dd/MM/yyyy'}}</mat-cell>
   </ng-container>
 
   <!-- How Column -->
@@ -80,4 +88,27 @@
 
   <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
   <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let client">
+      <div style="width:150px;word-wrap:break-word">
+        {{client.id}}
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Delete Column -->
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let client">
+      <div class="example-button-container">
+        <button mat-icon-button color="warn" (click)="deleteClient(client.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-cell>
+  </ng-container>
+
 </table>
