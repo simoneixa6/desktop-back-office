@@ -10,3 +10,9 @@ mat-header-cell:nth-child(5) {
   flex: 0 0 20%;
   padding-right: 15px;
 }
+
+mat-cell:nth-child(6),
+mat-header-cell:nth-child(6) {
+  flex: 0 0 10%;
+  padding-right: 15px;
+}
