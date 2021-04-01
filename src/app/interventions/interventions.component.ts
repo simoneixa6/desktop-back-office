@@ -15,8 +15,8 @@ import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
 
 export class InterventionsComponent implements OnInit {
 
-  urlRead = 'https://simon.biz/interventions';
-  urlWrite = 'https://simon.biz/interventionswr/';
+  urlRead = 'interventions-read:44322/interventions';
+  urlWrite = 'interventions-write:44391/interventionswr/';
 
   interventions: MatTableDataSource<Intervention> = new MatTableDataSource<Intervention>();
   columnsToDisplay = ['status', 'title', 'client', 'user', 'description', 'periods', 'km', 'billNumber', 'billDate', 'paymentType', 'paymentDate', 'id', 'delete'];

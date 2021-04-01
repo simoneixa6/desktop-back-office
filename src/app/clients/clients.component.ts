@@ -14,6 +14,8 @@ import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
 })
 export class ClientsComponent implements OnInit {
 
+  urlRead = 'clients-read:44322/clients';
+  urlWrite = 'clients-write:44391/clientswr/';
   clients: MatTableDataSource<Client> = new MatTableDataSource<Client>();
   columnsToDisplay: string[] = ['civility', 'name', 'lastname', 'company', 'companyStatus', 'phone', 'mail', 'addresses', 'firstVisitDate', 'how', 'why', 'problematic', 'deleted', 'id', 'delete'];
 
@@ -25,7 +27,7 @@ export class ClientsComponent implements OnInit {
   }
 
   getClients(): void {
-    this.http.get<Client[]>('https://simon.biz/clients').subscribe(response => {
+    this.http.get<Client[]>(this.urlRead).subscribe(response => {
         console.log(response);
         this.clients = new MatTableDataSource<Client>(response);
       },
@@ -37,7 +39,7 @@ export class ClientsComponent implements OnInit {
 
   deleteClient(id: string): void {
     this.http
-      .delete('https://simon.biz/clientswr/' + id)
+      .delete(this.urlWrite + id)
       .subscribe(
         () => {
           console.log('Suppression effectué !');
