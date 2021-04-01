@@ -3,3 +3,10 @@ table {
   margin: 20px auto;
   padding-right: 15px;
 }
+
+// Changement de la taille de la colonne Description
+mat-cell:nth-child(8),
+mat-header-cell:nth-child(8) {
+  flex: 0 0 20%;
+  padding-right: 15px;
+}

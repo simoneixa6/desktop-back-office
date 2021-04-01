@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatTableDataSource} from '@angular/material/table';
 import {Client} from '../models/Client';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogConfirmDeleteComponent} from '../dialogs/DialogConfirmDeleteComponent';
+import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
 
 
 @Component({
@@ -14,7 +17,7 @@ export class ClientsComponent implements OnInit {
   clients: MatTableDataSource<Client> = new MatTableDataSource<Client>();
   columnsToDisplay: string[] = ['civility', 'name', 'lastname', 'company', 'companyStatus', 'phone', 'mail', 'addresses', 'firstVisitDate', 'how', 'why', 'problematic', 'deleted', 'id', 'delete'];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -27,7 +30,7 @@ export class ClientsComponent implements OnInit {
         this.clients = new MatTableDataSource<Client>(response);
       },
       (error => {
-        console.log('Erreur renvoyé par le serveur : ' + error);
+        this.showErrorDialog(error);
       })
     );
   }
@@ -41,9 +44,32 @@ export class ClientsComponent implements OnInit {
           this.getClients();
         },
         (error) => {
-          console.log('Erreur ! : ' + error);
+          this.showErrorDialog(error);
         }
       );
+  }
+
+  openDialog(id: string): void {
+    const dialogRef = this.dialog.open(DialogConfirmDeleteComponent, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+        console.log('The dialog was closed and yes was clicked');
+        this.deleteClient(id);
+      } else {
+        console.log('The dialog was closed and delete was canceled');
+      }
+    });
+  }
+
+  private showErrorDialog(error: any): void {
+    const dialogRef = this.dialog.open(DialogErrorComponent, {
+      width: '500px',
+      data: {content: JSON.stringify(error)}
+    });
   }
 
 }

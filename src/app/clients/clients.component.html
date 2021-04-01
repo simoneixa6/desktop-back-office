@@ -1,4 +1,4 @@
-<table mat-table class="mat-elevation-z8" [dataSource]="clients" >
+<table mat-table class="mat-elevation-z8" [dataSource]="clients">
 
 
   <!-- Civility Column -->
@@ -21,25 +21,25 @@
 
   <!-- Company Column -->
   <ng-container matColumnDef="company">
-    <mat-header-cell *matHeaderCellDef> Entreprise </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Entreprise</mat-header-cell>
     <mat-cell *matCellDef="let client"> {{client.company}}</mat-cell>
   </ng-container>
 
   <!-- Company Status Column -->
   <ng-container matColumnDef="companyStatus">
-    <mat-header-cell *matHeaderCellDef> Statut de l'entreprise </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Statut de l'entreprise</mat-header-cell>
     <mat-cell *matCellDef="let client"> {{client.companyStatus}}</mat-cell>
   </ng-container>
 
   <!-- Phone Column -->
   <ng-container matColumnDef="phone">
-    <mat-header-cell *matHeaderCellDef> Téléphone </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Téléphone</mat-header-cell>
     <mat-cell *matCellDef="let client"> {{client.phone}}</mat-cell>
   </ng-container>
 
   <!-- Mail Column -->
   <ng-container matColumnDef="mail">
-    <mat-header-cell *matHeaderCellDef> Mail </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Mail</mat-header-cell>
     <mat-cell *matCellDef="let client"> {{client.mail}}</mat-cell>
   </ng-container>
 
@@ -47,30 +47,34 @@
   <ng-container matColumnDef="addresses">
     <mat-header-cell *matHeaderCellDef>Addresses</mat-header-cell>
     <mat-cell *matCellDef="let client">
-<!--      <mat-label>{{client.addresses[0].city}}</mat-label>
+      <mat-form-field *ngIf="client.addresses" style="width: 95%">
+      <mat-label>{{client.addresses[0].address}} {{client.addresses[0].zipCode}} {{client.addresses[0].city}}</mat-label>
       <mat-select style="margin-right: 30px">
-        <mat-option *ngFor="let site of client.addresses">
-          {{site.address}}  {{site.zipCode}}  {{site.city}}
-        </mat-option>
-      </mat-select>-->
+          <mat-option *ngFor="let site of client.addresses">
+            <span *ngIf="site.address">{{site.address}} </span>
+            <span *ngIf="site.zipCode">{{site.zipCode}} </span>
+            <span *ngIf="site.city">{{site.city}}</span>
+          </mat-option>
+      </mat-select>
+      </mat-form-field>
     </mat-cell>
   </ng-container>
 
   <!-- FirstVisitDate Column -->
   <ng-container matColumnDef="firstVisitDate">
-    <mat-header-cell *matHeaderCellDef> Date de première visite </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Date de première visite</mat-header-cell>
     <mat-cell *matCellDef="let client"> {{client.firstVisitDate | date:'dd/MM/yyyy'}}</mat-cell>
   </ng-container>
 
   <!-- How Column -->
   <ng-container matColumnDef="how">
-    <mat-header-cell *matHeaderCellDef> Comment ? </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Comment ?</mat-header-cell>
     <mat-cell *matCellDef="let client"> {{client.how}}</mat-cell>
   </ng-container>
 
   <!-- Why Column -->
   <ng-container matColumnDef="why">
-    <mat-header-cell *matHeaderCellDef> Pourquoi ? </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Pourquoi ?</mat-header-cell>
     <mat-cell *matCellDef="let client"> {{client.why}}</mat-cell>
   </ng-container>
 
@@ -91,7 +95,7 @@
 
   <!-- Id Column -->
   <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
     <mat-cell *matCellDef="let client">
       <div style="width:150px;word-wrap:break-word">
         {{client.id}}
@@ -104,7 +108,7 @@
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let client">
       <div class="example-button-container">
-        <button mat-icon-button color="warn" (click)="deleteClient(client.id)">
+        <button mat-icon-button style="margin-left: 40px" color="warn" (click)="openDialog(client.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>

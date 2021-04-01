@@ -3,7 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {MatTableDataSource} from '@angular/material/table';
 import {Media} from '../models/Media';
 import {MediaFile} from '../models/MediaFile';
-import * as mime from 'mime-types';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogConfirmDeleteComponent} from '../dialogs/DialogConfirmDeleteComponent';
+import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
+
+// import * as mime from 'mime-types';
 
 @Component({
   selector: 'app-medias',
@@ -13,42 +17,51 @@ import * as mime from 'mime-types';
 
 export class MediasComponent implements OnInit {
 
+  url = 'https://simon.biz/medias/';
   medias: MatTableDataSource<Media> = new MatTableDataSource<Media>();
-  columnsToDisplay = ['id', 'fileName', 'tempName', 'date', 'intervention_id', 'deleted', 'download'];
+  columnsToDisplay = [ 'id', 'fileName', 'tempName', 'mimeType', 'date', 'intervention_id', 'deleted', 'download', 'delete'];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.http.get<Media[]>('https://simon.biz/medias').subscribe(response => {
+    this.getMedias();
+  }
+
+  getMedias(): void {
+    this.http.get<Media[]>(this.url).subscribe(response => {
         console.log(response);
         this.medias = new MatTableDataSource<Media>(response);
       },
       (error => {
-        console.log('Erreur renvoyé par le serveur : ' + error);
+        this.showErrorDialog(error);
       })
     );
   }
 
   downloadMedia(id: string): void {
-    this.http.get<MediaFile>('https://simon.biz/medias/' + id + '/file').subscribe(response => {
+    this.http.get<MediaFile>(this.url + id + '/file').subscribe(response => {
         console.log(response);
-
-        const re = /(?:\.([^.]+))?$/;
-        // @ts-ignore
-        const extension = re.exec(response.fileName)[1];
-        const mimeType = mime.lookup(extension);
-
-        if (mimeType !== false)
-        {
-          console.log(extension);
-          this.displayFile(response.fileData, mimeType);
-        }
+        this.displayFile(response.fileData, response.mimeType);
       },
       (error => {
-        console.log('Erreur renvoyé par le serveur : ' + error);
+        this.showErrorDialog(error);
       })
     );
+  }
+
+  deleteMedia(id: string): void {
+    this.http
+      .delete(this.url + id)
+      .subscribe(
+        () => {
+          console.log('Suppression effectué !');
+          this.getMedias();
+        },
+        (error) => {
+          this.showErrorDialog(error);
+        }
+      );
   }
 
   displayFile(data: string, typeMime: string): void {
@@ -75,6 +88,32 @@ export class MediasComponent implements OnInit {
     const blob = new Blob(byteArrays, {type: contentType});
     return blob;
   }
+
+  openDialog(id: string): void {
+    const dialogRef = this.dialog.open(DialogConfirmDeleteComponent, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+        console.log('The dialog was closed and yes was clicked');
+        this.deleteMedia(id);
+      } else {
+        console.log('The dialog was closed and delete was canceled');
+      }
+    });
+  }
+
+  private showErrorDialog(error: any): void {
+    const dialogRef = this.dialog.open(DialogErrorComponent, {
+      width: '500px',
+      data: {content: JSON.stringify(error)}
+    });
+  }
 }
 
+export interface DialogError {
+  status: string;
+}
 
