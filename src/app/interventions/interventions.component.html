@@ -53,9 +53,11 @@
   <ng-container matColumnDef="address">
     <mat-header-cell *matHeaderCellDef>Addresse</mat-header-cell>
     <mat-cell *matCellDef="let intervention">
-            <span *ngIf="intervention.address.address">{{intervention.address.address}} </span>
-            <span *ngIf="intervention.address.zipCode">{{intervention.address.zipCode}} </span>
-            <span *ngIf="intervention.address.city">{{intervention.address.city}}</span>
+      <div *ngIf="intervention.address">
+        <span *ngIf="intervention.address.address">{{intervention.address.address}} </span>
+        <span *ngIf="intervention.address.zipCode">{{intervention.address.zipCode}} </span>
+        <span *ngIf="intervention.address.city">{{intervention.address.city}}</span>
+      </div>
     </mat-cell>
   </ng-container>
 
@@ -79,7 +81,6 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
     </mat-cell>
   </ng-container>
 
