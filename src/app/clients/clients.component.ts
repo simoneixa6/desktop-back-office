@@ -14,8 +14,8 @@ import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
 })
 export class ClientsComponent implements OnInit {
 
-  urlRead = 'clients-read:44322/clients';
-  urlWrite = 'clients-write:44391/clientswr/';
+  urlRead = 'https://simon.biz/clients';
+  urlWrite = 'https://simon.biz/clientswr/';
   clients: MatTableDataSource<Client> = new MatTableDataSource<Client>();
   columnsToDisplay: string[] = ['civility', 'name', 'lastname', 'company', 'companyStatus', 'phone', 'mail', 'addresses', 'firstVisitDate', 'how', 'why', 'problematic', 'deleted', 'id', 'delete'];
 

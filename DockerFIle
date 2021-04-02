@@ -33,7 +33,7 @@ RUN ng build --output-path=dist
 FROM arm64v8/nginx
 
 # copy artifact build from the 'build environment'
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html/dist/desktop-back-office/
 
 # expose port 80
 EXPOSE 80

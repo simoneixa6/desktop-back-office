@@ -10,7 +10,6 @@ import {DialogErrorComponent} from './dialogs/DialogErrorComponent';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
-import {Routes, RouterModule} from '@angular/router'; // CLI imports router
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -22,10 +21,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
-
-const routes: Routes = [
-  { path: 'backoffice', component: AppComponent },
-];
 
 @NgModule({
   declarations: [
@@ -39,7 +34,6 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     HttpClientModule,
     MatTableModule,
@@ -53,7 +47,6 @@ const routes: Routes = [
     MatDialogModule,
     MatButtonModule,
   ],
-  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

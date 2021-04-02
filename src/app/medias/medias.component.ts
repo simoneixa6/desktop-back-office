@@ -17,7 +17,7 @@ import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
 
 export class MediasComponent implements OnInit {
 
-  url = 'medias:60396/medias/';
+  url = 'https://simon.biz/medias/';
   medias: MatTableDataSource<Media> = new MatTableDataSource<Media>();
   columnsToDisplay = [ 'id', 'fileName', 'tempName', 'mimeType', 'date', 'intervention_id', 'deleted', 'download', 'delete'];
 
