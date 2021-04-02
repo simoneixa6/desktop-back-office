@@ -82,7 +82,9 @@
   <!-- Bill Date Column -->
   <ng-container matColumnDef="billDate">
     <mat-header-cell *matHeaderCellDef>Date de facturation</mat-header-cell>
-    <mat-cell *matCellDef="let intervention">{{intervention.billDate | date:'dd/MM/yyyy'}}</mat-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div *ngIf="intervention.billDate !== '0001-01-01T00:00:00Z'">{{intervention.billDate | date:'dd/MM/yyyy'}}</div>
+    </mat-cell>
   </ng-container>
 
   <!-- Payment Type Column -->
