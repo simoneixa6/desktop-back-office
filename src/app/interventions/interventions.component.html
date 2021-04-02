@@ -64,8 +64,8 @@
         <mat-select>
           <mat-option *ngFor="let period of intervention.periods">
             <span *ngIf="period.date">{{period.date | date:'dd/MM/yyyy'}}  -   </span>
-            <span *ngIf="period.start">{{period.start | date: 'hh:mm'}} -> </span>
-            <span *ngIf="period.end">{{period.end | date: 'hh:mm'}}</span>
+            <span *ngIf="period.start">{{period.start | date: 'HH:mm'}} -> </span>
+            <span *ngIf="period.end">{{period.end | date: 'HH:mm'}}</span>
           </mat-option>
         </mat-select>
       </mat-form-field>
