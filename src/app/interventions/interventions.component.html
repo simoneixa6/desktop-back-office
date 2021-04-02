@@ -123,9 +123,6 @@
     <mat-cell *matCellDef="let intervention"> {{intervention.deleted}}</mat-cell>
   </ng-container>
 
-  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-
   <!-- Id Column -->
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
