@@ -19,7 +19,7 @@ export class InterventionsComponent implements OnInit {
   urlWrite = 'https://simon.biz/interventionswr/';
 
   interventions: MatTableDataSource<Intervention> = new MatTableDataSource<Intervention>();
-  columnsToDisplay = ['status', 'title', 'client', 'user', 'description', 'periods', 'km', 'billNumber', 'billDate', 'paymentType', 'paymentDate', 'id', 'delete'];
+  columnsToDisplay = ['status', 'title', 'client', 'user', 'description', 'periods', 'address' , 'km', 'billNumber', 'billDate', 'paymentType', 'paymentDate', 'deleted' , 'id', 'delete'];
 
   constructor(private http: HttpClient, public dialog: MatDialog) {
   }

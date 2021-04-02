@@ -63,7 +63,9 @@
   <!-- FirstVisitDate Column -->
   <ng-container matColumnDef="firstVisitDate">
     <mat-header-cell *matHeaderCellDef> Date de première visite</mat-header-cell>
-    <mat-cell *matCellDef="let client"> {{client.firstVisitDate | date:'dd/MM/yyyy'}}</mat-cell>
+    <mat-cell *matCellDef="let client">
+      <div *ngIf="client.firstVisitDate !== '0001-01-01T00:00:00Z'">{{client.firstVisitDate | date:'dd/MM/yyyy'}}</div>
+    </mat-cell>
   </ng-container>
 
   <!-- How Column -->

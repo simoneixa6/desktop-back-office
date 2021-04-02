@@ -49,6 +49,16 @@
     </mat-cell>
   </ng-container>
 
+  <!-- Address Column -->
+  <ng-container matColumnDef="address">
+    <mat-header-cell *matHeaderCellDef>Addresse</mat-header-cell>
+    <mat-cell *matCellDef="let intervention">
+            <span *ngIf="intervention.address.address">{{intervention.address.address}} </span>
+            <span *ngIf="intervention.address.zipCode">{{intervention.address.zipCode}} </span>
+            <span *ngIf="intervention.address.city">{{intervention.address.city}}</span>
+    </mat-cell>
+  </ng-container>
+
   <!-- Km Column -->
   <ng-container matColumnDef="km">
     <mat-header-cell *matHeaderCellDef>Km</mat-header-cell>
@@ -76,7 +86,11 @@
   <!-- Bill Number Column -->
   <ng-container matColumnDef="billNumber">
     <mat-header-cell *matHeaderCellDef>Numéro de facture</mat-header-cell>
-    <mat-cell *matCellDef="let intervention">{{intervention.billNumber}}</mat-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div style="width:150px;word-wrap:break-word">
+        {{intervention.billNumber}}
+      </div>
+    </mat-cell>
   </ng-container>
 
   <!-- Bill Date Column -->
@@ -96,8 +110,20 @@
   <!-- Payment Date Column -->
   <ng-container matColumnDef="paymentDate">
     <mat-header-cell *matHeaderCellDef>Date de paiement</mat-header-cell>
-    <mat-cell *matCellDef="let intervention">{{intervention.paymentDate | date:'dd/MM/yyyy'}}</mat-cell>
+    <mat-cell *matCellDef="let intervention">
+      <div
+        *ngIf="intervention.paymentDate !== '0001-01-01T00:00:00Z'">{{intervention.paymentDate | date:'dd/MM/yyyy'}}</div>
+    </mat-cell>
   </ng-container>
+
+  <!-- Deleted Column -->
+  <ng-container matColumnDef="deleted">
+    <mat-header-cell *matHeaderCellDef>Supprimé</mat-header-cell>
+    <mat-cell *matCellDef="let intervention"> {{intervention.deleted}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
 
   <!-- Id Column -->
   <ng-container matColumnDef="id">
