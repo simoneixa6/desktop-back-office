@@ -71,14 +71,14 @@
     <mat-header-cell *matHeaderCellDef>Périodes</mat-header-cell>
     <mat-cell *matCellDef="let intervention">
       <mat-form-field>
-        <mat-label>{{intervention.periods[0].date | date: 'dd/MM/yyyy'}}</mat-label>
+        <mat-label>{{intervention.periods[0].date | date: 'dd/MM/yyyy' : 'UTC'}}</mat-label>
         <mat-select>
           <mat-option *ngFor="let period of intervention.periods">
-            <span *ngIf="period.date">{{period.date | date:'dd/MM/yyyy'}}  -   </span>
-            <span *ngIf="period.start">{{period.start | date: 'HH:mm'}} -> </span>
+            <span *ngIf="period.date">{{period.date | date:'dd/MM/yyyy' : 'UTC'}}  -   </span>
+            <span *ngIf="period.start">{{period.start | date: 'HH:mm' : 'UTC'}} -> </span>
             <span *ngIf="period.end">
               <span *ngIf="period.end !== '0001-01-01T00:00:00Z'">
-                {{period.end | date: 'HH:mm'}}
+                {{period.end | date: 'HH:mm' : 'UTC'}}
               </span>
             </span>
           </mat-option>
@@ -101,7 +101,7 @@
   <ng-container matColumnDef="billDate">
     <mat-header-cell *matHeaderCellDef>Date de facturation</mat-header-cell>
     <mat-cell *matCellDef="let intervention">
-      <div *ngIf="intervention.billDate !== '0001-01-01T00:00:00Z'">{{intervention.billDate | date:'dd/MM/yyyy'}}</div>
+      <div *ngIf="intervention.billDate !== '0001-01-01T00:00:00Z'">{{intervention.billDate | date:'dd/MM/yyyy' : 'UTC'}}</div>
     </mat-cell>
   </ng-container>
 
@@ -116,7 +116,7 @@
     <mat-header-cell *matHeaderCellDef>Date de paiement</mat-header-cell>
     <mat-cell *matCellDef="let intervention">
       <div
-        *ngIf="intervention.paymentDate !== '0001-01-01T00:00:00Z'">{{intervention.paymentDate | date:'dd/MM/yyyy'}}</div>
+        *ngIf="intervention.paymentDate !== '0001-01-01T00:00:00Z'">{{intervention.paymentDate | date:'dd/MM/yyyy' : 'UTC'}}</div>
     </mat-cell>
   </ng-container>
 
