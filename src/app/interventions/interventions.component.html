@@ -29,7 +29,7 @@
   <!-- Client Column -->
   <ng-container matColumnDef="client">
     <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
-    <mat-cell *matCellDef="let intervention">{{intervention.client.name}} {{intervention.client.lastname}}</mat-cell>
+    <mat-cell *matCellDef="let intervention">{{intervention.client.name}} {{intervention.client.lastname}} {{intervention.client.company}}</mat-cell>
   </ng-container>
 
   <!-- User Column -->
