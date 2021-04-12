@@ -6,8 +6,8 @@ import {MediaFile} from '../models/MediaFile';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogConfirmDeleteComponent} from '../dialogs/DialogConfirmDeleteComponent';
 import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
+import {Jwt} from '../jwt';
 
-// import * as mime from 'mime-types';
 
 @Component({
   selector: 'app-medias',
@@ -29,7 +29,7 @@ export class MediasComponent implements OnInit {
   }
 
   getMedias(): void {
-    this.http.get<Media[]>(this.url).subscribe(response => {
+    this.http.get<Media[]>(this.url, Jwt.httpOptions).subscribe(response => {
         console.log(response);
         this.medias = new MatTableDataSource<Media>(response);
       },
@@ -40,7 +40,7 @@ export class MediasComponent implements OnInit {
   }
 
   downloadMedia(id: string): void {
-    this.http.get<MediaFile>(this.url + id + '/file').subscribe(response => {
+    this.http.get<MediaFile>(this.url + id + '/file', Jwt.httpOptions).subscribe(response => {
         console.log(response);
         this.displayFile(response.fileData, response.mimeType);
       },
@@ -52,7 +52,7 @@ export class MediasComponent implements OnInit {
 
   deleteMedia(id: string): void {
     this.http
-      .delete(this.url + id)
+      .delete(this.url + id, Jwt.httpOptions)
       .subscribe(
         () => {
           console.log('Suppression effectué !');

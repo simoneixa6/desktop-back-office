@@ -5,6 +5,7 @@ import {Intervention} from '../models/Intervention';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DialogConfirmDeleteComponent} from '../dialogs/DialogConfirmDeleteComponent';
 import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
+import {Jwt} from '../jwt';
 
 @Component({
   selector: 'app-interventions',
@@ -29,7 +30,7 @@ export class InterventionsComponent implements OnInit {
   }
 
   getInterventions(): void {
-    this.http.get<Intervention[]>(this.urlRead).subscribe(response => {
+    this.http.get<Intervention[]>(this.urlRead, Jwt.httpOptions).subscribe(response => {
         console.log(response);
         this.interventions = new MatTableDataSource<Intervention>(response);
       },
@@ -41,7 +42,7 @@ export class InterventionsComponent implements OnInit {
 
   deleteIntervention(id: string): void {
     this.http
-      .delete(this.urlWrite + id)
+      .delete(this.urlWrite + id, Jwt.httpOptions)
       .subscribe(
         () => {
           console.log('Suppression effectué !');

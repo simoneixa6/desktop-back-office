@@ -6,6 +6,7 @@ import {ClientsComponent} from './clients/clients.component';
 import {MediasComponent} from './medias/medias.component';
 import {DialogConfirmDeleteComponent} from './dialogs/DialogConfirmDeleteComponent';
 import {DialogErrorComponent} from './dialogs/DialogErrorComponent';
+import {Jwt} from './jwt';
 
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
@@ -21,6 +22,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDialogModule,
     MatButtonModule,
   ],
-  providers: [],
+  providers: [Jwt],
   bootstrap: [AppComponent]
 })
 export class AppModule {
