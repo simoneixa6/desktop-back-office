@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
+// Singleton permettant de rendre global le header coontenant le token d'authentificationoooo
 export class Jwt {
 
   static httpOptions = {

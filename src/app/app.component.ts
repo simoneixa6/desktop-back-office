@@ -15,12 +15,14 @@ export class AppComponent {
   url = 'https://simon.biz/authentication/authenticate';
 
   constructor(private http: HttpClient) {
-    this.updateToken();
+    // Permet de mettre à jour le token au démarrage
+    // this.updateToken();
   }
 
-  public updateToken(): void {
+// Méthode permettant de récupérer un token et de mettre a jour le header d'options qui est commun a l'application
+/*  public updateToken(): void {
     // A modifier pour ne pas avoir les identifiants en dur dans le code
-    const user = new User('simon', 'bonjour');
+    const user = new User('', '');
     this.http
       .post<AuthenticatedUser>(this.url, user)
       .subscribe(
@@ -32,5 +34,5 @@ export class AppComponent {
           console.log(error);
         }
       );
-  }
+  }*/
 }

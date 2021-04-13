@@ -5,7 +5,6 @@ import {Client} from '../models/Client';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogConfirmDeleteComponent} from '../dialogs/DialogConfirmDeleteComponent';
 import {DialogErrorComponent} from '../dialogs/DialogErrorComponent';
-import {Jwt} from '../jwt';
 
 
 @Component({
@@ -28,7 +27,7 @@ export class ClientsComponent implements OnInit {
   }
 
   getClients(): void {
-    this.http.get<Client[]>(this.urlRead, Jwt.httpOptions).subscribe(response => {
+    this.http.get<Client[]>(this.urlRead).subscribe(response => {
         console.log(response);
         this.clients = new MatTableDataSource<Client>(response);
       },
@@ -40,7 +39,7 @@ export class ClientsComponent implements OnInit {
 
   deleteClient(id: string): void {
     this.http
-      .delete(this.urlWrite + id, Jwt.httpOptions)
+      .delete(this.urlWrite + id)
       .subscribe(
         () => {
           console.log('Suppression effectué !');
